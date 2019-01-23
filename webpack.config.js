@@ -8,7 +8,7 @@ const paths = {
 };
 
 module.exports = {
-  mode: "production",
+  mode: "development",
   entry: "./src/Map.tsx",
   output: {
     path: path.resolve("lib"),
@@ -28,7 +28,12 @@ module.exports = {
         test: /\.tsx?$/,
         exclude: /(node_modules)/,
         use: "ts-loader"
-      }
+      },
+      {
+        test: /\.css$/,
+        exclude: /(node_modules)/,
+        use: ['style-loader', 'css-loader'],
+      },
     ]
   },
   plugins: [new NodemonPlugin()]
