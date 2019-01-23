@@ -4,6 +4,7 @@ import Marker from "app/Marker";
 import MapList from "./list/MapList";
 
 import './styles.css';
+import MapSearchGroup from "./filter/MapSearchGroup";
 
 const AnyReactComponent: any = () => <div>hello</div>;
 
@@ -20,6 +21,7 @@ class Map extends React.Component<any, any> {
     return (
       // Important! Always set the container height explicitly
       <div style={{ height: "80vh", width: "100%" }}>
+        <MapSearchGroup />
         <MapList mapItems={
           [
             { title: 'Area 2', description: 'Blk 25 Ghim Moh Link #01-09 Singapore 270025', index: 1, distance: '10m' },
