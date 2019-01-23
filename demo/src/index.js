@@ -1,12 +1,15 @@
 import React from "react";
+import ReactDOM from "react-dom";
+
 import { render } from "react-dom";
 
 import MapComponent from "../../lib";
 
-render(
+const app = (
   <div>
     <h2>Dummy Map Component</h2>
     <MapComponent />
-  </div>,
-  document.getElementById("app")
+  </div>
 );
+
+ReactDOM.render(app, document.getElementById("app"));

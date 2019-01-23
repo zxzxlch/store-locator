@@ -6,6 +6,7 @@
   "main": "./lib/index.js",
   "license": "ISC",
   "scripts": {
+    "init": "npm install && cd demo && npm install",
     "build": "webpack --watch",
     "app": "cd demo && npm run start",
     "dev": "concurrently \"npm run build\" \"npm run app\" "
