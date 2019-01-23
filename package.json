@@ -1,0 +1,38 @@
+{
+  "name": "sgmap",
+  "version": "1.0.0",
+  "description": "",
+  "author": "",
+  "main": "./lib/index.js",
+  "license": "ISC",
+  "scripts": {
+    "build": "webpack --watch",
+    "app": "cd demo && npm run start",
+    "dev": "concurrently \"npm run build\" \"npm run app\" "
+  },
+  "dependencies": {
+    "@types/google-map-react": "^0.23.10",
+    "@types/react": "^16.7.20",
+    "@types/react-dom": "^16.0.11",
+    "google-map-react": "^1.1.2",
+    "react": "^16.7.0",
+    "react-dom": "^16.7.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.21.0",
+    "babel-loader": "^7.1.4",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.16.0",
+    "babel-preset-stage-0": "^6.24.1",
+    "concurrently": "^4.1.0",
+    "nodemon-webpack-plugin": "^4.0.7",
+    "path": "^0.12.7",
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0",
+    "ts-loader": "^5.3.3",
+    "tsconfig-paths-webpack-plugin": "^3.2.0",
+    "typescript": "^3.2.4",
+    "webpack": "^4.5.0",
+    "webpack-cli": "^3.2.1"
+  }
+}
