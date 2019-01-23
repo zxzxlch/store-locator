@@ -1,7 +1,7 @@
 import * as React from "react";
 import GoogleMapReact from "google-map-react";
 import MapList from "app/list/MapList";
-const AnyReactComponent: any = () => <div>hello</div>;
+import Marker from "./Marker";
 
 class Map extends React.Component<any, any> {
   static defaultProps = {
@@ -54,7 +54,9 @@ class Map extends React.Component<any, any> {
             }}
             defaultCenter={this.props.center}
             defaultZoom={this.props.zoom}
-          />
+          >
+            <Marker lat={59.955413} lng={30.337844} />
+          </GoogleMapReact>
         </div>
       </div>
     );
