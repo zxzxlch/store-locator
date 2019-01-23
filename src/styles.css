@@ -8,6 +8,7 @@ body {
 
 .map {
   display: flex;
+  height: 60vh;
 }
 
 .map .list {
@@ -17,6 +18,16 @@ body {
 .map .view {
   flex: 2;
   background: grey;
+}
+
+.marker {
+  text-align: center;
+}
+.marker .pin {
+}
+.marker .number {
+  font-size: 14px;
+  color: white;
 }
 
 /* SEARCH-GROUP */
