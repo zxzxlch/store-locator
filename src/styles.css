@@ -21,10 +21,13 @@ body {
 }
 
 .marker {
-  width: 24px;
-  height: 30px;
-  box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.23);
-  background-color: #2471c9;
+  text-align: center;
+}
+.marker .pin {
+}
+.marker .number {
+  font-size: 14px;
+  color: white;
 }
 
 /* SEARCH-GROUP */
