@@ -4,6 +4,21 @@ body {
   font-family: "Source Sans Pro", Tahoma, Geneva, Verdana, sans-serif;
 }
 
+/* MAP */
+
+.map {
+  display: flex;
+}
+
+.map .list {
+  flex: 1;
+}
+
+.map .view {
+  flex: 2;
+  background: grey;
+}
+
 /* SEARCH-GROUP */
 
 .search__group {

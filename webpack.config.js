@@ -9,7 +9,7 @@ const paths = {
 
 module.exports = {
   mode: "development",
-  entry: "./src/Map.tsx",
+  entry: "./src/StoreLocator.tsx",
   output: {
     path: path.resolve("lib"),
     filename: "index.js",
