@@ -2,44 +2,14 @@ import * as React from "react";
 import GoogleMapReact from "google-map-react";
 import MapList from "app/list/MapList";
 import Marker from "./Marker";
+import * as json from "../../demo/src/chas.json";
+import { any } from "prop-types";
 
 class Map extends React.Component<any, any> {
   state = {
-    mapItems: [
-      {
-        title: "Area 2",
-        description: "Blk 25 Ghim Moh Link #01-09 Singapore 270025",
-        index: 1,
-        distance: "10m",
-        lat: 1.332174,
-        lng: 103.847187
-      },
-      {
-        title: "Location 2",
-        description: "Blk 25 Ghim Moh Link #01-09 Singapore 270025",
-        index: 2,
-        distance: "10m",
-        lat: 1.319796,
-        lng: 103.843811
-      },
-      {
-        title: "Space 3",
-        description: "sdjkvnsdv sdjvlnsdvnsd",
-        index: 3,
-        distance: "10m",
-        lat: 1.310488,
-        lng: 103.846671
-      },
-      {
-        title: "Distance 4",
-        description: "dsadsadsd",
-        index: 4,
-        distance: "10m",
-        lat: 1.322174,
-        lng: 103.827187
-      }
-    ]
+    mapItems: (json as any).data.slice(0, 100)
   };
+
   static defaultProps = {
     center: {
       lat: 1.3,
@@ -49,14 +19,27 @@ class Map extends React.Component<any, any> {
   };
 
   render() {
+    const mapItems = this.state.mapItems.map(item => {
+      const {
+        id: index,
+        name: title,
+        address,
+        postal_code: postalCode,
+        lat,
+        lng
+      } = item;
+      const description = `${address}, Singapore ${postalCode}`;
+      return { index, title, description, lat, lng };
+    });
+
     return (
       // Important! Always set the container height explicitly
 
-      <div className='map'>
-        <div className='list'>
-          <MapList mapItems={this.state.mapItems} />
+      <div className="map">
+        <div className="list">
+          <MapList mapItems={mapItems} />
         </div>
-        <div className='view'>
+        <div className="view">
           <GoogleMapReact
             defaultCenter={this.props.center}
             defaultZoom={this.props.zoom}
@@ -64,15 +47,9 @@ class Map extends React.Component<any, any> {
               key: "AIzaSyAyesbQMyKVVbBgKVi2g6VX7mop2z96jBo"
             }}
           >
-            {this.state.mapItems.map(item => {
-              return (
-                <Marker
-                  key={item.index}
-                  lat={item.lat}
-                  lng={item.lng}
-                  item={item}
-                />
-              );
+            {mapItems.map(item => {
+              const { lat, lng } = item;
+              return <Marker key={item.index} {...{ lat, lng, item }} />;
             })}
           </GoogleMapReact>
         </div>

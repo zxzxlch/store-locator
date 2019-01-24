@@ -1,5 +1,5 @@
 import * as React from "react";
-import Marker from "app/Marker";
+import Marker from "map/Marker";
 import MapList from "./list/MapList";
 import MapSearchGroup from "./filter/MapSearchGroup";
 import Map from "./map/Map";
