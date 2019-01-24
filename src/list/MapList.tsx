@@ -8,8 +8,9 @@ interface IMapListProps {
 const MapList: React.SFC<IMapListProps> = (props) => (
   <div>
     <span className='counter__text'>
-    Showing {props.mapItems.length} places near 1 Fusionopolis view</span>
-    {props.mapItems.map(item => <MapListItem {...item} />)}
+      Showing {props.mapItems.length} places near 1 Fusionopolis view
+    </span>
+    {props.mapItems.map(item => <MapListItem key={item.title} {...item} />)}
   </div>
 );
 
