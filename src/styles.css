@@ -22,8 +22,13 @@ body {
 
 .marker {
   text-align: center;
+  /* background-image: url("./map-pin.svg"); */
+  background: wheat;
+  width: 24px;
+  height: 30px;
 }
 .marker .pin {
+  margin: -20px 0 0 -12px;
 }
 .marker .number {
   font-size: 14px;

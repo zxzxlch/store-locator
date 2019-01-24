@@ -6,8 +6,8 @@ import Marker from "./Marker";
 class Map extends React.Component<any, any> {
   static defaultProps = {
     center: {
-      lat: 59.95,
-      lng: 30.33
+      lat: 1.3,
+      lng: 103.78
     },
     zoom: 11
   };
@@ -55,7 +55,7 @@ class Map extends React.Component<any, any> {
             defaultCenter={this.props.center}
             defaultZoom={this.props.zoom}
           >
-            <Marker lat={59.955413} lng={30.337844} />
+            <Marker lat={1.299485} lng={103.788859} />
           </GoogleMapReact>
         </div>
       </div>
