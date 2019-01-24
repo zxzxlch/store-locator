@@ -104,7 +104,7 @@ body {
 .list__item .content {
   padding: 20px 20px 20px 0;
   display: flex;
-  border-bottom: 1px solid rgb(178, 178, 178);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
   flex-grow: 1;
 }
 
