@@ -50,6 +50,19 @@ body {
   color: #333333;
 }
 
+.button.current__location {
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  color: #4a90e2;
+  text-decoration: underline;
+  margin: 10px 0;
+}
+
+.button.current__location .location__icon {
+  margin-right: 8px;
+}
+
 .search__input .field {
   border: 1px solid #9e9e9e;
   max-width: 100%;
@@ -81,7 +94,7 @@ body {
 
 .list__item .index {
   color: white;
-  background: #7f7f7f;
+  background: #2471c9;
   width: 24px;
   height: 24px;
   line-height: 24px;
@@ -96,7 +109,7 @@ body {
 .list__item .content {
   padding: 20px 20px 20px 0;
   display: flex;
-  border-bottom: 1px solid rgb(178, 178, 178);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
   flex-grow: 1;
 }
 
@@ -122,4 +135,14 @@ body {
 .list__item .info .description {
   font-size: 16px;
   line-height: 1.38;
+}
+
+@media only screen and (max-width: 800px) {
+  .map .view {
+    display: none;
+  }
+
+  .list__item .index {
+    display: none;
+  }
 }
