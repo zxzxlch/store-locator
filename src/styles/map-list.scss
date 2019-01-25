@@ -1,0 +1,68 @@
+/* MAP-LIST */
+
+.counter__text {
+  padding: 24px 0 8px 0;
+  display: block;
+  font-size: 16px;
+  line-height: 1.38;
+  color: #333333;
+}
+
+.list__item {
+  color: #333333;
+  display: flex;
+  flex-direction: row;
+}
+
+.list__item > :first-child {
+  margin-right: 16px;
+}
+
+.list__item .index {
+  color: white;
+  background: #2471c9;
+  width: 24px;
+  height: 24px;
+  line-height: 24px;
+  border-radius: 12px;
+  margin-top: 20px;
+  font-size: 17px;
+  font-weight: 600;
+  text-align: center;
+  flex-shrink: 0;
+
+  @media screen and (max-width: 800px) {
+    display: none;
+  }
+}
+
+.list__item .content {
+  padding: 20px 20px 20px 0;
+  display: flex;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+  flex-grow: 1;
+}
+
+.list__item .content .distance {
+  color: #333333;
+  font-size: 16px;
+  font-weight: 400;
+  text-align: right;
+}
+
+.list__item .content .info {
+  display: block;
+  margin-right: 16px;
+  flex-grow: 1;
+}
+
+.list__item .info .title {
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+.list__item .info .description {
+  font-size: 16px;
+  line-height: 1.38;
+}

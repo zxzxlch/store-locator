@@ -1,0 +1,38 @@
+/* MAP */
+
+.map {
+  display: flex;
+  height: 60vh;
+}
+
+.map .list {
+  flex: 1;
+}
+
+.map .view {
+  flex: 2;
+  background: grey;
+
+  @media screen and (max-width: 800px) {
+    display: none;
+  }
+}
+
+.marker {
+  text-align: center;
+  position: relative;
+  /* background-image: url(../src/map-pin.svg); */
+  /* background-size: 72px 90px;*/
+  /* width: 28px;
+  height: 35px; */
+}
+.marker .pin {
+  position: absolute;
+  margin: -20px 0 0 -12px;
+}
+.marker .number {
+  position: absolute;
+  margin: -24px 0 0 -8px;
+  font-size: 14px;
+  color: white;
+}
