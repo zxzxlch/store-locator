@@ -9577,5 +9577,6 @@
       "programmes": ["CDMP", "CHAS", "ISP"]
     }
   ],
+  "filters": ["CDMP", "CHAS", "ISP"],
   "meta": { "expiry_date": "2019-01-24T12:24:11.480Z" }
 }
