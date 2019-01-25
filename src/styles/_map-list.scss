@@ -27,7 +27,7 @@
   border-radius: 12px;
   margin-top: 20px;
   font-size: 17px;
-  font-weight: 600;
+  font-weight: $font-weight-semibold;
   text-align: center;
   flex-shrink: 0;
 
@@ -46,7 +46,7 @@
 .list__item .content .distance {
   color: #333333;
   font-size: 16px;
-  font-weight: 400;
+  font-weight: $font-weight-regular;
   text-align: right;
 }
 
@@ -58,7 +58,7 @@
 
 .list__item .info .title {
   font-size: 17px;
-  font-weight: 600;
+  font-weight: $font-weight-semibold;
   line-height: 1.5;
 }
 

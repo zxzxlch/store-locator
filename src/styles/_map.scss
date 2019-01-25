@@ -2,16 +2,29 @@
 
 .map {
   display: flex;
-  height: 60vh;
+  height: 72vh;
+  overflow-y: hidden;
 }
 
 .map .list {
-  flex: 1;
+  flex: 1 0 320px;
+
+  @media #{$medium-up} {
+    flex: 0 0 320px;
+    max-width: 400px;
+    height: 100%;
+    overflow: auto;
+  }
+
+  @media #{$large-up} {
+    flex: 1 0 320px;
+  }
 }
 
 .map .view {
   flex: 2;
   background: grey;
+  margin-right: 32px;
 
   @media #{$small-only} {
     display: none;
