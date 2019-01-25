@@ -31,7 +31,7 @@
   text-align: center;
   flex-shrink: 0;
 
-  @media screen and (max-width: 800px) {
+  @media #{$small-only} {
     display: none;
   }
 }

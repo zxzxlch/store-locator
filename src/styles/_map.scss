@@ -13,7 +13,7 @@
   flex: 2;
   background: grey;
 
-  @media screen and (max-width: 800px) {
+  @media #{$small-only} {
     display: none;
   }
 }

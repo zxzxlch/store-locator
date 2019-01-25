@@ -1,0 +1,18 @@
+// Global variables
+@function lower-bound($list) {
+  @return nth($list, 1);
+}
+
+@function upper-bound($list) {
+  @return nth($list, 2);
+}
+
+$screen-xs-min: 768px;
+$small-range: (0px, 768px);
+$medium-range: (769px, 1152px);
+
+$screen: "only screen" !default;
+// $small-only: "#{$screen} and (max-width: #{$screen-xs-min})";
+$small-only: "#{$screen} and (max-width: #{upper-bound($small-range)})" !default;
+// $medium-up: "#{$screen} and (min-width: #{screen-xs-min + 1})" !default;
+$medium-up: "#{$screen} and (min-width: #{lower-bound($medium-range)})" !default;

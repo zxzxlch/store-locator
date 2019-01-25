@@ -9,11 +9,11 @@ interface IProps {
 const MapSearchGroup: React.SFC<IProps> = props => {
   return (
     <div className='search__group'>
-      <div className='left'>
+      <div className='filter filter-location'>
         <MapSearchInput />
         <CurrentLocationButton />
       </div>
-      <div className='right'>
+      <div className='filter'>
         <Filters filters={props.filters} />
       </div>
     </div>

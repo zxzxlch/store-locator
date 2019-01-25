@@ -1,8 +1,8 @@
 @import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700");
-@import "./search-group.scss";
-@import "./filters.scss";
-@import "./map.scss";
-@import "./map-list.scss";
+@import "globals";
+@import "filters";
+@import "map";
+@import "map-list";
 
 body {
   font-family: "Source Sans Pro", Tahoma, Geneva, Verdana, sans-serif;
