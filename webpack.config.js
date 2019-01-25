@@ -2,10 +2,13 @@ const fs = require("fs");
 const path = require("path");
 const NodemonPlugin = require("nodemon-webpack-plugin");
 const TsconfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 const paths = {
   TS_CONFIG: path.resolve(fs.realpathSync(process.cwd()), "tsconfig.json")
 };
+
+const devMode = process.env.NODE_ENV !== "production";
 
 module.exports = {
   mode: "development",
@@ -39,11 +42,33 @@ module.exports = {
         }
       },
       {
-        test: /\.css$/,
+        test: /\.scss$/,
         exclude: /(node_modules)/,
-        use: ["style-loader", "css-loader"]
+        use: [
+          devMode
+            ? "style-loader"
+            : {
+                loader: MiniCssExtractPlugin.loader,
+                options: {
+                  publicPath: "../"
+                }
+              },
+          "css-loader",
+          {
+            loader: "sass-loader",
+            options: {
+              implementation: require("sass")
+            }
+          }
+        ]
       }
     ]
   },
-  plugins: [new NodemonPlugin()]
+  plugins: [
+    new NodemonPlugin(),
+    new MiniCssExtractPlugin({
+      filename: "[name].css",
+      chunkFilename: "[id].css"
+    })
+  ]
 };

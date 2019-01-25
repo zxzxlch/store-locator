@@ -4,7 +4,7 @@ import MapList from "./list/MapList";
 import MapSearchGroup from "./filter/MapSearchGroup";
 import Map from "./map/Map";
 
-import "./styles.css";
+import "./styles/main.scss";
 
 class StoreLocator extends React.Component<any, any> {
   render() {
