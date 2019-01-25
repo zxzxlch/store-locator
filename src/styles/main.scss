@@ -43,8 +43,16 @@ body {
 
 .search__group {
   height: auto;
-  padding: 16px 20px;
+
   background: #f9f9f9;
+  display: flex;
+}
+.search__group .left {
+  padding: 16px 20px;
+}
+.search__group .right {
+  padding: 16px 20px;
+  border-left: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .search__input .label {
@@ -74,6 +82,14 @@ body {
   padding: 12px;
   font-size: 16px;
   color: #333333;
+}
+
+/* FILTERS */
+.filters input[type="checkbox"] {
+  width: 24px;
+  height: 24px;
+  border-radius: 2px;
+  background-color: #fefefe;
 }
 
 /* MAP-LIST */

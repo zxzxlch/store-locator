@@ -7,7 +7,7 @@ import { any } from "prop-types";
 
 class Map extends React.Component<any, any> {
   state = {
-    mapItems: (json as any).data.slice(0, 100)
+    mapItems: this.props.data as any
   };
 
   static defaultProps = {
@@ -35,11 +35,11 @@ class Map extends React.Component<any, any> {
     return (
       // Important! Always set the container height explicitly
 
-      <div className="map">
-        <div className="list">
+      <div className='map'>
+        <div className='list'>
           <MapList mapItems={mapItems} />
         </div>
-        <div className="view">
+        <div className='view'>
           <GoogleMapReact
             defaultCenter={this.props.center}
             defaultZoom={this.props.zoom}

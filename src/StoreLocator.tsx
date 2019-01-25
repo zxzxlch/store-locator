@@ -8,11 +8,12 @@ import "./styles/main.scss";
 
 class StoreLocator extends React.Component<any, any> {
   render() {
+    let tags = ["CDMP", "CHAS", "ISP"];
     return (
       // Important! Always set the container height explicitly
       <div>
-        <MapSearchGroup />
-        <Map />
+        <MapSearchGroup filters={this.props.filters} />
+        <Map data={this.props.data} />
       </div>
     );
   }
