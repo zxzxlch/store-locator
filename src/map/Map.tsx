@@ -3,7 +3,8 @@ import GoogleMapReact from "google-map-react";
 import MapList from "app/list/MapList";
 import Marker from "./Marker";
 import { FilteredLocation } from "../types/index";
-import { any } from "prop-types";
+import { any, number } from "prop-types";
+import { MapListItemProps } from "app/list/MapListItem";
 
 interface Props {
   data: any;
@@ -25,7 +26,48 @@ class Map extends React.Component<Props, any> {
     this.map = map;
   };
 
-  didUpdateCurrentLocation = ({ lat: plat, lng: plng }: FilteredLocation): void => {
+  getMapItems = (data): MapListItemProps[] => {
+    const { currentLocation } = this.props;
+
+    return data.map((item: any) => {
+      const {
+        id: index,
+        name: title,
+        address,
+        postal_code: postalCode,
+        lat,
+        lng
+      } = item;
+
+      const description = `${address}, Singapore ${postalCode}`;
+
+      var accessory: string = undefined;
+      if (currentLocation) {
+        // Calculate distance
+        const a = new google.maps.LatLng(lat, lng);
+        const b = new google.maps.LatLng(
+          currentLocation.lat,
+          currentLocation.lng
+        );
+        const d: number = google.maps.geometry.spherical.computeDistanceBetween(
+          a,
+          b
+        );
+        if (d < 1000) {
+          accessory = `${Math.round(d)} m`;
+        } else {
+          accessory = `${Math.round(d / 1000)} km`;
+        }
+      }
+
+      return { index, title, description, lat, lng, accessory };
+    });
+  };
+
+  didUpdateCurrentLocation = ({
+    lat: plat,
+    lng: plng
+  }: FilteredLocation): void => {
     const { lat, lng } = this.props.currentLocation;
 
     if (lat === plat && lng === plng) return;
@@ -52,18 +94,7 @@ class Map extends React.Component<Props, any> {
       center = { lat, lng };
     }
 
-    const mapItems = data.map((item: any) => {
-      const {
-        id: index,
-        name: title,
-        address,
-        postal_code: postalCode,
-        lat,
-        lng
-      } = item;
-      const description = `${address}, Singapore ${postalCode}`;
-      return { index, title, description, lat, lng };
-    });
+    const mapItems = this.getMapItems(data);
 
     return (
       // Important! Always set the container height explicitly

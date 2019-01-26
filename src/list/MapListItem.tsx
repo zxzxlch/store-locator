@@ -1,23 +1,24 @@
 import * as React from "react";
 
-export interface IMapListItem {
+export interface MapListItemProps {
   index: number;
   title: string;
   description: string;
-  distance: string;
+  accessory: string;
 }
 
-const MapListItem: React.SFC<IMapListItem> = props => {
-  const { index } = props;
+const MapListItem: React.SFC<MapListItemProps> = props => {
+  const { index, title, description, accessory } = props;
+
   return (
     <div className="list__item">
       <span className="index">{index}</span>
       <div className="content">
         <div className="info">
-          <div className="title">{props.title}</div>
-          <div className="description">{props.description}</div>
+          <div className="title">{title}</div>
+          <div className="description">{description}</div>
         </div>
-        <span className="distance">100m</span>
+        <span className="accessory">{accessory}</span>
       </div>
     </div>
   );

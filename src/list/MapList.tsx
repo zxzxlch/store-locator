@@ -1,11 +1,11 @@
 import * as React from "react";
-import MapListItem, { IMapListItem } from "./MapListItem";
+import MapListItem, { MapListItemProps } from "./MapListItem";
 
-interface IMapListProps {
-  mapItems: IMapListItem[];
+interface Props {
+  mapItems: MapListItemProps[];
 }
 
-const MapList: React.SFC<IMapListProps> = props => {
+const MapList: React.SFC<Props> = props => {
   const { mapItems } = props;
   return (
     <div>
