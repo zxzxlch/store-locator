@@ -25,7 +25,7 @@ class Map extends React.Component<Props, any> {
     this.map = map;
   };
 
-  didUpdateCurrentLocation = ({ plat, plng }: FilteredLocation): void => {
+  didUpdateCurrentLocation = ({ lat: plat, lng: plng }: FilteredLocation): void => {
     const { lat, lng } = this.props.currentLocation;
 
     if (lat === plat && lng === plng) return;
