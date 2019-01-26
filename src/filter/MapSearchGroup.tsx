@@ -1,19 +1,12 @@
 import * as React from "react";
-import Filters from "./Filters";
-import LocationFilter from "./LocationFilter";
 import { checkPropTypes } from "prop-types";
-interface IProps {
-  filters: String[];
+
+interface Props {
+  children: JSX.Element | JSX.Element[];
 }
-const MapSearchGroup: React.SFC<IProps> = props => {
-  return (
-    <div className="search__group">
-      <LocationFilter />
-      <div className="filter">
-        <Filters filters={props.filters} />
-      </div>
-    </div>
-  );
+
+const MapSearchGroup: React.SFC<Props> = props => {
+  return <div className="search__group">{props.children}</div>;
 };
 
 export default MapSearchGroup;

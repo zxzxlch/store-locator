@@ -31,10 +31,10 @@ class LocationFilter extends React.Component<any, any> {
   render() {
     return (
       <div className="filter filter-location">
-        <label for="filterLocation">Search near a location</label>
+        <label htmlFor="filterLocation">Search near a location</label>
         <input
           name="filterLocation"
-          class="filter-location__search-input"
+          className="filter-location__search-input"
           placeholder="Address or postal code"
           type="text"
           ref={this.searchInput}
