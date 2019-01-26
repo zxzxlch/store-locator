@@ -1,32 +1,46 @@
 import * as React from "react";
 import CurrentLocationButton from "./CurrentLocationButton";
+import { FilteredLocation } from "app/types/index";
 
-class LocationFilter extends React.Component<any, any> {
+interface Props {
+  updateCurrentLocation: (FilteredLocation) => void;
+}
+
+class LocationFilter extends React.Component<Props, any> {
   autocomplete: any;
 
   state = {};
-  searchInput = React.createRef();
-
-  // constructor(props) {
-  //   super(props);
-  //   this.searchInput = React.createRef();
-  // }
+  searchInput: React.RefObject<HTMLInputElement> = React.createRef();
 
   componentDidMount() {
-    this.autocomplete = new google.maps.places.Autocomplete(this.searchInput.current, {
-      types: ["geocode"],
-      fields: ["formatted_address"]
-    });
+    this.autocomplete = new google.maps.places.Autocomplete(
+      this.searchInput.current,
+      {
+        types: ["geocode"],
+        fields: ["geometry", "formatted_address"]
+      }
+    );
 
     this.autocomplete.addListener("place_changed", this.updateSearchInput);
   }
 
   updateSearchInput = () => {
     // Get the place details from the autocomplete object.
-    var place = this.autocomplete.getPlace();
-    this.searchInput.current.value = place.formatted_address;
-    console.log(place);
-  }
+    const {
+      formatted_address,
+      geometry: { location }
+    } = this.autocomplete.getPlace();
+    
+    // Update text field value
+    this.searchInput.current.value = formatted_address;
+
+    // Update state
+    this.props.updateCurrentLocation({
+      lat: location.lat(),
+      lng: location.lng(),
+      formatted_address
+    });
+  };
 
   render() {
     return (

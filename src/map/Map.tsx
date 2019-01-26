@@ -2,13 +2,16 @@ import * as React from "react";
 import GoogleMapReact from "google-map-react";
 import MapList from "app/list/MapList";
 import Marker from "./Marker";
-import * as json from "../../demo/src/chas.json";
+import { FilteredLocation } from "../types/index";
 import { any } from "prop-types";
 
-class Map extends React.Component<any, any> {
-  state = {
-    mapItems: this.props.data as any
-  };
+interface Props {
+  data: any;
+  currentLocation: FilteredLocation;
+}
+
+class Map extends React.Component<Props, any> {
+  map: any;
 
   static defaultProps = {
     center: {
@@ -18,8 +21,38 @@ class Map extends React.Component<any, any> {
     zoom: 11
   };
 
+  googleApiDidLoad = ({ map }) => {
+    this.map = map;
+  };
+
+  didUpdateCurrentLocation = ({ plat, plng }: FilteredLocation): void => {
+    const { lat, lng } = this.props.currentLocation;
+
+    if (lat === plat && lng === plng) return;
+
+    if (this.map.getZoom() < 15) {
+      this.map.setZoom(15);
+    }
+  };
+
+  componentDidUpdate(prevProps: Props, prevState: Props) {
+    if (prevProps.currentLocation) {
+      this.didUpdateCurrentLocation(prevProps.currentLocation);
+    } else {
+      this.map.setZoom(15);
+    }
+  }
+
   render() {
-    const mapItems = this.state.mapItems.map(item => {
+    const { data, currentLocation } = this.props;
+
+    var center = null;
+    if (currentLocation) {
+      const { lat, lng } = currentLocation;
+      center = { lat, lng };
+    }
+
+    const mapItems = data.map((item: any) => {
       const {
         id: index,
         name: title,
@@ -34,18 +67,20 @@ class Map extends React.Component<any, any> {
 
     return (
       // Important! Always set the container height explicitly
-
-      <div className='map'>
-        <div className='list'>
+      <div className="map">
+        <div className="list">
           <MapList mapItems={mapItems} />
         </div>
-        <div className='view'>
+        <div className="view">
           <GoogleMapReact
             defaultCenter={this.props.center}
             defaultZoom={this.props.zoom}
+            center={center}
             bootstrapURLKeys={{
               key: "AIzaSyAyesbQMyKVVbBgKVi2g6VX7mop2z96jBo"
             }}
+            yesIWantToUseGoogleMapApiInternals
+            onGoogleApiLoaded={this.googleApiDidLoad}
           >
             {mapItems.map(item => {
               const { lat, lng } = item;
