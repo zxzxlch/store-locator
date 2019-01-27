@@ -26,10 +26,10 @@ class Map extends React.Component<Props, any> {
     this.map = map;
   };
 
-  getMapItems = (data): MapListItemProps[] => {
+  getMapItems = (data: any): MapListItemProps[] => {
     const { currentLocation } = this.props;
 
-    return data.map((item: any) => {
+    const parsed: any[] = data.map((item: any) => {
       const {
         id: index,
         name: title,
@@ -41,7 +41,10 @@ class Map extends React.Component<Props, any> {
 
       const description = `${address}, Singapore ${postalCode}`;
 
-      var accessory: string = undefined;
+      // Calculaate distance and set accessory text
+      var accessory: string;
+      var distance: number;
+
       if (currentLocation) {
         // Calculate distance
         const a = new google.maps.LatLng(lat, lng);
@@ -49,19 +52,30 @@ class Map extends React.Component<Props, any> {
           currentLocation.lat,
           currentLocation.lng
         );
-        const d: number = google.maps.geometry.spherical.computeDistanceBetween(
-          a,
-          b
-        );
-        if (d < 1000) {
-          accessory = `${Math.round(d)} m`;
+        distance = google.maps.geometry.spherical.computeDistanceBetween(a, b);
+        if (distance < 1000) {
+          accessory = `${Math.round(distance)} m`;
         } else {
-          accessory = `${Math.round(d / 1000)} km`;
+          accessory = `${Math.round(distance / 1000)} km`;
         }
       }
 
-      return { index, title, description, lat, lng, accessory };
+      return { index, title, description, lat, lng, accessory, distance };
     });
+
+    if (!currentLocation) return parsed;
+
+    // Sort by distance if current location is set
+    return parsed
+      .sort(({ distance: d1 }, { distance: d2 }) => (d1 < d2 ? -1 : 1))
+      .map(({ index, title, description, lat, lng, accessory }, ind) => ({
+        index: ind + 1,
+        title,
+        description,
+        lat,
+        lng,
+        accessory
+      }));
   };
 
   didUpdateCurrentLocation = ({
