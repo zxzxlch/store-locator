@@ -3,12 +3,12 @@ import GoogleMapReact from "google-map-react";
 import MapList from "app/list/MapList";
 import Marker from "./Marker";
 import { FilteredLocation } from "../types/index";
-import { any, number } from "prop-types";
 import { MapListItemProps } from "app/list/MapListItem";
 
 interface Props {
   data: any;
   currentLocation: FilteredLocation;
+  mapListItems: MapListItemProps[];
 }
 
 class Map extends React.Component<Props, any> {
@@ -24,58 +24,6 @@ class Map extends React.Component<Props, any> {
 
   googleApiDidLoad = ({ map }) => {
     this.map = map;
-  };
-
-  getMapItems = (data: any): MapListItemProps[] => {
-    const { currentLocation } = this.props;
-
-    const parsed: any[] = data.map((item: any) => {
-      const {
-        id: index,
-        name: title,
-        address,
-        postal_code: postalCode,
-        lat,
-        lng
-      } = item;
-
-      const description = `${address}, Singapore ${postalCode}`;
-
-      // Calculaate distance and set accessory text
-      var accessory: string;
-      var distance: number;
-
-      if (currentLocation) {
-        // Calculate distance
-        const a = new google.maps.LatLng(lat, lng);
-        const b = new google.maps.LatLng(
-          currentLocation.lat,
-          currentLocation.lng
-        );
-        distance = google.maps.geometry.spherical.computeDistanceBetween(a, b);
-        if (distance < 1000) {
-          accessory = `${Math.round(distance)} m`;
-        } else {
-          accessory = `${Math.round(distance / 1000)} km`;
-        }
-      }
-
-      return { index, title, description, lat, lng, accessory, distance };
-    });
-
-    if (!currentLocation) return parsed;
-
-    // Sort by distance if current location is set
-    return parsed
-      .sort(({ distance: d1 }, { distance: d2 }) => (d1 < d2 ? -1 : 1))
-      .map(({ index, title, description, lat, lng, accessory }, ind) => ({
-        index: ind + 1,
-        title,
-        description,
-        lat,
-        lng,
-        accessory
-      }));
   };
 
   didUpdateCurrentLocation = ({
@@ -100,7 +48,7 @@ class Map extends React.Component<Props, any> {
   }
 
   render() {
-    const { data, currentLocation } = this.props;
+    const { data, currentLocation, mapListItems } = this.props;
 
     var center = null;
     if (currentLocation) {
@@ -108,13 +56,11 @@ class Map extends React.Component<Props, any> {
       center = { lat, lng };
     }
 
-    const mapItems = this.getMapItems(data);
-
     return (
       // Important! Always set the container height explicitly
       <div className="map">
         <div className="list">
-          <MapList mapItems={mapItems} />
+          <MapList mapItems={mapListItems} />
         </div>
         <div className="view">
           <GoogleMapReact
@@ -127,8 +73,8 @@ class Map extends React.Component<Props, any> {
             yesIWantToUseGoogleMapApiInternals
             onGoogleApiLoaded={this.googleApiDidLoad}
           >
-            {mapItems.map(item => {
-              const { lat, lng } = item;
+            {mapListItems.map(item => {
+              const { location: {lat, lng} } = item;
               return <Marker key={item.index} {...{ lat, lng, item }} />;
             })}
           </GoogleMapReact>
