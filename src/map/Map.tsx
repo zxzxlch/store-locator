@@ -2,8 +2,7 @@ import * as React from "react";
 import GoogleMapReact from "google-map-react";
 import MapList from "app/list/MapList";
 import Marker from "./Marker";
-import { Location } from "../types/index";
-import { MapListItemProps } from "app/list/MapListItem";
+import { Location, MapListItemProps } from "../types/index";
 
 interface Props {
   data: any;

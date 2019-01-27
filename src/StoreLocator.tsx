@@ -4,18 +4,17 @@ import LocationFilter from "./filter/LocationFilter";
 import Filters from "./filter/Filters";
 import Map from "./map/Map";
 import {
-  mapPlacesToListItems,
-  sortMapListItems,
-  StoreFilters
+  mapPlacesToStoreItems as defaultMapPlacesToStoreItems,
+  sortStoreItems as defaultSortStoreItems,
 } from "./data/mappings";
-import { MapListItemProps } from "./list/MapListItem";
-import { Location } from "./types/index";
+import { Location, StoreFilters, MapListItemProps, MapPlacesToStoreItemsFunction } from "./types/index";
 
 import "./styles/main.scss";
 
 interface Props {
+  mapPlacesToListItems: MapPlacesToStoreItemsFunction;
   data: any[];
-  filters: Array<string>;
+  filters: string[];
 }
 
 interface State {
@@ -24,6 +23,10 @@ interface State {
 }
 
 class StoreLocator extends React.Component<Props, State> {
+  public static defaultProps: any = {
+    mapPlacesToListItems: defaultMapPlacesToStoreItems
+  };
+
   state: State = {
     currentLocation: null,
     mapListItems: []
@@ -33,20 +36,20 @@ class StoreLocator extends React.Component<Props, State> {
     super(props);
 
     // Initialize map list items
-    this.state.mapListItems = mapPlacesToListItems(props.data, {
+    this.state.mapListItems = this.props.mapPlacesToListItems(props.data, {
       currentLocation: this.state.currentLocation
     });
   }
 
   // Convert data to map items, apply filters and sort
-  mapDataToMapListItems = (data: any[], filters: StoreFilters) => {
+  mapPlacesToStoreItems = (data: any[], filters: StoreFilters) => {
     const { currentLocation } = filters;
 
-    const filtered = mapPlacesToListItems(data, {
+    const filtered = this.props.mapPlacesToListItems(data, {
       currentLocation
     });
 
-    const sorted = sortMapListItems(filtered, currentLocation);
+    const sorted = defaultSortStoreItems(filtered, currentLocation);
 
     return sorted;
   };
@@ -55,7 +58,7 @@ class StoreLocator extends React.Component<Props, State> {
   updateMapListItems = () => {
     const { data } = this.props;
     const { currentLocation } = this.state;
-    const mapListItems = this.mapDataToMapListItems(data, { currentLocation });
+    const mapListItems = this.mapPlacesToStoreItems(data, { currentLocation });
     this.setState({ mapListItems });
   };
 

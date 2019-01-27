@@ -1,5 +1,6 @@
 import * as React from "react";
-import MapListItem, { MapListItemProps } from "./MapListItem";
+import MapListItem from "./MapListItem";
+import { MapListItemProps } from "app/types/index";
 
 interface Props {
   mapItems: MapListItemProps[];

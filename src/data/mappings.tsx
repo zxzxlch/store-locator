@@ -1,27 +1,19 @@
-import { MapListItemProps } from "app/list/MapListItem";
-import { Location } from "app/types/index";
+import {
+  Location,
+  StoreFilters,
+  MapListItemProps,
+  MapPlacesToStoreItemsFunction,
+  SortStoreItemsFunction
+} from "app/types/index";
 
-export interface StoreFilters {
-  currentLocation?: Location;
-}
-
-export function mapPlacesToListItems(
+export const mapPlacesToStoreItems: MapPlacesToStoreItemsFunction = function(
   places: any[],
   filters: StoreFilters
 ): MapListItemProps[] {
   const { currentLocation } = filters;
 
-  return places.map((place: any) => {
-    const {
-      id: index,
-      name: title,
-      address,
-      postal_code: postalCode,
-      lat,
-      lng
-    } = place;
-
-    const description = `${address}, Singapore ${postalCode}`;
+  return places.map((place: any, index) => {
+    const { title, description, lat, lng } = place;
 
     // Calculate distance and set accessory text
     var accessory: string;
@@ -42,12 +34,12 @@ export function mapPlacesToListItems(
       distance
     };
   });
-}
+};
 
 export function calculateDistance(
   { lat: alat, lng: alng }: Location,
   { lat: blat, lng: blng }: Location
-) {
+): number {
   const a = new google.maps.LatLng(alat, alng);
   const b = new google.maps.LatLng(blat, blng);
   return google.maps.geometry.spherical.computeDistanceBetween(a, b);
@@ -61,7 +53,7 @@ export function distanceToHumanString(meters: number): string {
   }
 }
 
-export function sortMapListItems(
+export const sortStoreItems: SortStoreItemsFunction = function(
   mapListItems: MapListItemProps[],
   currentLocation?: Location
 ): MapListItemProps[] {
@@ -73,4 +65,4 @@ export function sortMapListItems(
     .map((item, ind) => {
       return Object.assign({}, item, { index: ind + 1 });
     });
-}
+};

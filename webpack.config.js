@@ -12,7 +12,7 @@ const devMode = process.env.NODE_ENV !== "production";
 
 module.exports = {
   mode: "development",
-  entry: "./src/StoreLocator.tsx",
+  entry: "./src/index.tsx",
   output: {
     path: path.resolve("lib"),
     filename: "index.js",

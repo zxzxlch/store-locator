@@ -1,14 +1,5 @@
 import * as React from "react";
-import { Location } from "app/types/index";
-
-export interface MapListItemProps {
-  index: number;
-  title: string;
-  description: string;
-  accessory: string;
-  distance?: number;
-  location?: Location;
-}
+import { MapListItemProps } from "app/types/index";
 
 const MapListItem: React.SFC<MapListItemProps> = props => {
   const { index, title, description, accessory } = props;
