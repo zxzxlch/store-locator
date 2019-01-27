@@ -1,9 +1,9 @@
 import * as React from "react";
 import CurrentLocationButton from "./CurrentLocationButton";
-import { FilteredLocation } from "app/types/index";
+import { Location } from "app/types/index";
 
 interface Props {
-  updateCurrentLocation: (FilteredLocation) => void;
+  updateCurrentLocation: (location: Location) => void;
 }
 
 class LocationFilter extends React.Component<Props, any> {

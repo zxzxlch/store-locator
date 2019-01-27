@@ -1,5 +1,5 @@
 import * as React from "react";
-import { FilteredLocation } from "app/types/index";
+import { Location } from "app/types/index";
 
 export interface MapListItemProps {
   index: number;
@@ -7,7 +7,7 @@ export interface MapListItemProps {
   description: string;
   accessory: string;
   distance?: number;
-  location?: FilteredLocation;
+  location?: Location;
 }
 
 const MapListItem: React.SFC<MapListItemProps> = props => {

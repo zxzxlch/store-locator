@@ -9,7 +9,7 @@ import {
   StoreFilters
 } from "./data/mappings";
 import { MapListItemProps } from "./list/MapListItem";
-import { FilteredLocation } from "./types/index";
+import { Location } from "./types/index";
 
 import "./styles/main.scss";
 
@@ -19,7 +19,7 @@ interface Props {
 }
 
 interface State {
-  currentLocation: FilteredLocation;
+  currentLocation: Location;
   mapListItems: MapListItemProps[];
 }
 
@@ -59,7 +59,7 @@ class StoreLocator extends React.Component<Props, State> {
     this.setState({ mapListItems });
   };
 
-  updateCurrentLocation = (currentLocation: FilteredLocation) => {
+  updateCurrentLocation = (currentLocation: Location) => {
     this.setState({ currentLocation });
   };
 

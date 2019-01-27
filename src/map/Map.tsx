@@ -2,12 +2,12 @@ import * as React from "react";
 import GoogleMapReact from "google-map-react";
 import MapList from "app/list/MapList";
 import Marker from "./Marker";
-import { FilteredLocation } from "../types/index";
+import { Location } from "../types/index";
 import { MapListItemProps } from "app/list/MapListItem";
 
 interface Props {
   data: any;
-  currentLocation: FilteredLocation;
+  currentLocation: Location;
   mapListItems: MapListItemProps[];
 }
 
@@ -29,7 +29,7 @@ class Map extends React.Component<Props, any> {
   didUpdateCurrentLocation = ({
     lat: plat,
     lng: plng
-  }: FilteredLocation): void => {
+  }: Location): void => {
     const { lat, lng } = this.props.currentLocation;
 
     if (lat === plat && lng === plng) return;

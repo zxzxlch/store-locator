@@ -1,8 +1,8 @@
 import { MapListItemProps } from "app/list/MapListItem";
-import { FilteredLocation } from "app/types/index";
+import { Location } from "app/types/index";
 
 export interface StoreFilters {
-  currentLocation?: FilteredLocation;
+  currentLocation?: Location;
 }
 
 export function mapPlacesToListItems(
@@ -45,8 +45,8 @@ export function mapPlacesToListItems(
 }
 
 export function calculateDistance(
-  { lat: alat, lng: alng }: FilteredLocation,
-  { lat: blat, lng: blng }: FilteredLocation
+  { lat: alat, lng: alng }: Location,
+  { lat: blat, lng: blng }: Location
 ) {
   const a = new google.maps.LatLng(alat, alng);
   const b = new google.maps.LatLng(blat, blng);
@@ -63,7 +63,7 @@ export function distanceToHumanString(meters: number): string {
 
 export function sortMapListItems(
   mapListItems: MapListItemProps[],
-  currentLocation?: FilteredLocation
+  currentLocation?: Location
 ): MapListItemProps[] {
   if (!currentLocation) return mapListItems;
 
