@@ -5,11 +5,14 @@ import Filters from "./filter/Filters";
 import Map from "./map/Map";
 import {
   mapPlacesToStoreItems as defaultMapPlacesToStoreItems,
-  sortStoreItems as defaultSortStoreItems,
+  sortStoreItems as defaultSortStoreItems
 } from "./data/mappings";
-import { Location, StoreFilters, MapListItemProps, MapPlacesToStoreItemsFunction } from "./types/index";
-
-import "./styles/main.scss";
+import {
+  Location,
+  StoreFilters,
+  MapListItemProps,
+  MapPlacesToStoreItemsFunction
+} from "./types/index";
 
 interface Props {
   mapPlacesToListItems: MapPlacesToStoreItemsFunction;

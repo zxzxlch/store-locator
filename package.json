@@ -1,15 +1,16 @@
 {
-  "name": "sgmap",
+  "name": "store-locator",
   "version": "1.0.0",
   "description": "",
   "author": "",
-  "main": "./lib/index.js",
+  "main": "dist/store-locator.js",
   "license": "ISC",
   "scripts": {
     "init": "npm install && cd demo && npm install",
-    "build:lib": "webpack --watch",
-    "build:app": "cd demo && npm run start",
-    "dev": "concurrently \"npm run build:lib\" \"npm run build:app\" "
+    "watch": "webpack --watch --config webpack.dev.js",
+    "demo:start": "cd demo && npm run start",
+    "dev": "concurrently \"npm run watch\" \"npm run demo:start\"",
+    "build": "webpack --config webpack.prod.js"
   },
   "dependencies": {
     "@types/google-map-react": "^0.23.10",
@@ -24,6 +25,7 @@
     "@babel/preset-env": "^7.3.1",
     "@babel/preset-react": "^7.0.0",
     "@babel/preset-stage-0": "^7.0.0",
+    "clean-webpack-plugin": "^1.0.1",
     "concurrently": "^4.1.0",
     "css-loader": "^2.1.0",
     "mini-css-extract-plugin": "^0.5.0",
@@ -37,6 +39,7 @@
     "typescript": "^3.2.4",
     "url-loader": "^1.1.2",
     "webpack": "^4.5.0",
-    "webpack-cli": "^3.2.1"
+    "webpack-cli": "^3.2.1",
+    "webpack-merge": "^4.2.1"
   }
 }

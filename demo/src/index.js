@@ -4,7 +4,7 @@ import {
   default as StoreLocator,
   calculateDistance,
   distanceToHumanString
-} from "../../lib";
+} from "../../dist/store-locator";
 import json from "./chas.json";
 
 function mapPlacesToListItems(places, filters) {
