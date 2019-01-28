@@ -1,10 +1,8 @@
 import * as React from "react";
-export interface IProps {
-  filters: String[];
-}
 
-const Filters: React.SFC<IProps> = props => {
-  let filters = props.filters;
+const Filters: React.SFC = props => {
+  // Hard code for now
+  let filters = ["CDMP", "CHAS", "ISP"];
 
   return (
     <div className='filters'>

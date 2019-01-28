@@ -50,7 +50,6 @@ const app = (
     <h1>CHAS Clinics</h1>
     <StoreLocator
       data={json.data.slice(0, 100)}
-      filters={json.filters}
       mapPlacesToStoreItems={mapPlacesToStoreItems}
     />
   </div>
