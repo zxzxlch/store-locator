@@ -20,7 +20,7 @@ Here's a quick summary of the steps.
 
 Include this script tag in your HTML file. This will load the places and geometry libraries from [Google Maps JavaScript API](https://developers.google.com/maps/documentation/javascript).
 
-```
+```html
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=_____YOUR_API_KEY_____&libraries=places,geometry"></script>
 ```
 
@@ -33,7 +33,7 @@ Import the StoreLocator component and add it to your app. Import the default CSS
 
 For example,
 
-```
+```jsx
 import StoreLocator from "@zxzxlch/store-locator";
 import "@zxzxlch/store-locator/dist/main.css";
 
@@ -53,7 +53,7 @@ class App extends Component {
 
 To display your data in the StoreLocator component without extra configuration, your data has to match this structure:
 
-```
+```json
 [
   {
     index: 1,
@@ -68,7 +68,7 @@ To display your data in the StoreLocator component without extra configuration, 
 
 Otherwise, you have to use a mapping function to transform your data. For example,
 
-```
+```jsx
 function mapPlacesToStoreItems(places, filters) {
   // Get the user-input search location so we can calculate proximity for each place
   const { currentLocation } = filters;
@@ -117,7 +117,7 @@ function mapPlacesToStoreItems(places, filters) {
 
 `calculateDistance` and `distanceToHumanString` are helper functions that are included with the package. To import the functions together with the component, for example,
 
-```
+```jsx
 import { default as StoreLocator, calculateDistance, distanceToHumanString } from "@zxzxlch/store-locator";
 ```
 
