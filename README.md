@@ -56,11 +56,11 @@ To display your data in the StoreLocator component without extra configuration, 
 ```json
 [
   {
-    index: 1,
-    title: "Woodlands Primary School",
-    description: "Fernvale Link",
-    accessory: "3 km",
-    location: { lat: 1.39807105477126, lng: 103.877933381804 }
+    "index": 1,
+    "title": "Woodlands Primary School",
+    "description": "Fernvale Link",
+    "accessory": "3 km",
+    "location": { lat: 1.39807105477126, lng: 103.877933381804 }
   },
   ...
 ]
