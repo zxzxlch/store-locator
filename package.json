@@ -1,10 +1,16 @@
 {
-  "name": "store-locator",
-  "version": "1.0.0",
-  "description": "",
-  "author": "",
+  "name": "@zxzxlch/store-locator",
+  "version": "0.1.0",
+  "description": "Add a mobile responsive store locator to any page.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zxzxlch/store-locator.git"
+  },
+  "bugs": {
+    "url": "https://github.com/zxzxlch/store-locator/issues"
+  },
   "main": "dist/store-locator.js",
-  "license": "ISC",
   "scripts": {
     "init": "npm install && cd demo && npm install",
     "watch": "webpack --watch --config webpack.dev.js",
