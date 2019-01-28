@@ -7,7 +7,7 @@ import { Location, MapListItemProps } from "../types/index";
 interface Props {
   data: any;
   currentLocation: Location;
-  mapListItems: MapListItemProps[];
+  storeItems: MapListItemProps[];
 }
 
 class Map extends React.Component<Props, any> {
@@ -47,7 +47,7 @@ class Map extends React.Component<Props, any> {
   }
 
   render() {
-    const { data, currentLocation, mapListItems } = this.props;
+    const { data, currentLocation, storeItems } = this.props;
 
     var center = null;
     if (currentLocation) {
@@ -59,7 +59,7 @@ class Map extends React.Component<Props, any> {
       // Important! Always set the container height explicitly
       <div className="map">
         <div className="list">
-          <MapList mapItems={mapListItems} />
+          <MapList mapItems={storeItems} />
         </div>
         <div className="view">
           <GoogleMapReact
@@ -72,7 +72,7 @@ class Map extends React.Component<Props, any> {
             yesIWantToUseGoogleMapApiInternals
             onGoogleApiLoaded={this.googleApiDidLoad}
           >
-            {mapListItems.map(item => {
+            {storeItems.map(item => {
               const { location: {lat, lng} } = item;
               return <Marker key={item.index} {...{ lat, lng, item }} />;
             })}

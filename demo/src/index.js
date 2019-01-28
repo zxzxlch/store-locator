@@ -18,19 +18,17 @@ function mapPlacesToStoreItems(places, filters) {
       postal_code: postalCode,
       programmes,
       lat,
-      lng
+      lng,
+      distance
     } = place;
 
     const programmesString = programmes.join(", ");
     const description = `Test${address}, Singapore ${postalCode}\n${programmesString}`;
 
-    // Calculate distance and set accessory text
+    // Set accessory text to distance
     var accessory;
-    var distance;
 
-    if (currentLocation) {
-      // Calculate distance
-      distance = calculateDistance({ lat, lng }, currentLocation);
+    if (distance) {
       accessory = distanceToHumanString(distance);
     }
 

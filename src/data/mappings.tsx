@@ -6,35 +6,7 @@ import {
   SortStoreItemsFunction
 } from "app/types/index";
 
-export const mapPlacesToStoreItems: MapPlacesToStoreItemsFunction = function(
-  places: any[],
-  filters: StoreFilters
-): MapListItemProps[] {
-  const { currentLocation } = filters;
-
-  return places.map((place: any, index) => {
-    const { title, description, lat, lng } = place;
-
-    // Calculate distance and set accessory text
-    var accessory: string;
-    var distance: number;
-
-    if (currentLocation) {
-      // Calculate distance
-      distance = calculateDistance({ lat, lng }, currentLocation);
-      accessory = distanceToHumanString(distance);
-    }
-
-    return {
-      index,
-      title,
-      description,
-      accessory,
-      location: { lat, lng },
-      distance
-    };
-  });
-};
+// Helper functions
 
 export function calculateDistance(
   { lat: alat, lng: alng }: Location,
@@ -53,6 +25,56 @@ export function distanceToHumanString(meters: number): string {
   }
 }
 
+// Mapping functions
+
+// Calculate distance for each place item
+export function updatePlacesDistance(
+  places: any[],
+  filters: StoreFilters
+): any[] {
+  const { currentLocation } = filters;
+
+  return places.map((place: any) => {
+    const { lat, lng } = place;
+    var distance: number;
+
+    if (currentLocation) {
+      // Calculate distance
+      distance = calculateDistance({ lat, lng }, currentLocation);
+    }
+
+    return {
+      ...place,
+      distance
+    };
+  });
+}
+
+export const mapPlacesToStoreItems: MapPlacesToStoreItemsFunction = function(
+  places: any[],
+  filters: StoreFilters
+): MapListItemProps[] {
+  return places.map((place: any, index) => {
+    const { title, description, distance, lat, lng } = place;
+
+    // Set accessory text to distance
+    var accessory: string;
+
+    if (distance) {
+      accessory = distanceToHumanString(distance);
+    }
+
+    return {
+      index,
+      title,
+      description,
+      accessory,
+      location: { lat, lng },
+      distance
+    };
+  });
+};
+
 export const sortStoreItems: SortStoreItemsFunction = function(
   mapListItems: MapListItemProps[],
   currentLocation?: Location
@@ -63,6 +85,9 @@ export const sortStoreItems: SortStoreItemsFunction = function(
   return mapListItems
     .sort(({ distance: d1 }, { distance: d2 }) => (d1 < d2 ? -1 : 1))
     .map((item, ind) => {
-      return Object.assign({}, item, { index: ind + 1 });
+      return {
+        ...item,
+        index: ind + 1
+      };
     });
 };

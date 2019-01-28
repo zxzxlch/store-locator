@@ -5,7 +5,8 @@ import Filters from "./filter/Filters";
 import Map from "./map/Map";
 import {
   mapPlacesToStoreItems as defaultMapPlacesToStoreItems,
-  sortStoreItems as defaultSortStoreItems
+  sortStoreItems as defaultSortStoreItems,
+  updatePlacesDistance
 } from "./data/mappings";
 import {
   Location,
@@ -22,7 +23,7 @@ interface Props {
 
 interface State {
   currentLocation: Location;
-  mapListItems: MapListItemProps[];
+  storeItems: MapListItemProps[];
 }
 
 class StoreLocator extends React.Component<Props, State> {
@@ -32,14 +33,14 @@ class StoreLocator extends React.Component<Props, State> {
 
   state: State = {
     currentLocation: null,
-    mapListItems: []
+    storeItems: []
   };
 
   constructor(props: Props) {
     super(props);
 
     // Initialize map list items
-    this.state.mapListItems = this.props.mapPlacesToStoreItems(props.data, {
+    this.state.storeItems = this.props.mapPlacesToStoreItems(props.data, {
       currentLocation: this.state.currentLocation
     });
   }
@@ -58,11 +59,16 @@ class StoreLocator extends React.Component<Props, State> {
   };
 
   // Update map list items with current filters
-  updateMapListItems = () => {
+  updateStoreItems = () => {
     const { data } = this.props;
     const { currentLocation } = this.state;
-    const mapListItems = this.mapPlacesToStoreItems(data, { currentLocation });
-    this.setState({ mapListItems });
+
+    // Calculate distance
+    const withDistance = updatePlacesDistance(data, { currentLocation });
+
+    // Map places to store items
+    const storeItems = this.mapPlacesToStoreItems(withDistance, { currentLocation });
+    this.setState({ storeItems });
   };
 
   updateCurrentLocation = (currentLocation: Location) => {
@@ -74,13 +80,13 @@ class StoreLocator extends React.Component<Props, State> {
     const { currentLocation: prevCurrentLocation } = prevState;
 
     if (currentLocation !== prevCurrentLocation) {
-      this.updateMapListItems();
+      this.updateStoreItems();
     }
   }
 
   render() {
     const { data } = this.props;
-    const { currentLocation, mapListItems } = this.state;
+    const { currentLocation, storeItems } = this.state;
     // let tags = ["CDMP", "CHAS", "ISP"];
 
     return (
@@ -95,7 +101,7 @@ class StoreLocator extends React.Component<Props, State> {
         <Map
           data={data}
           currentLocation={currentLocation}
-          mapListItems={mapListItems}
+          storeItems={storeItems}
         />
       </div>
     );
