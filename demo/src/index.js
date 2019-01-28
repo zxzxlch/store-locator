@@ -7,7 +7,7 @@ import {
 } from "../../dist/store-locator";
 import json from "./chas.json";
 
-function mapPlacesToListItems(places, filters) {
+function mapPlacesToStoreItems(places, filters) {
   const { currentLocation } = filters;
 
   return places.map(place => {
@@ -51,7 +51,7 @@ const app = (
     <StoreLocator
       data={json.data.slice(0, 100)}
       filters={json.filters}
-      mapPlacesToListItems={mapPlacesToListItems}
+      mapPlacesToStoreItems={mapPlacesToStoreItems}
     />
   </div>
 );

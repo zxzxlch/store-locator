@@ -15,7 +15,7 @@ import {
 } from "./types/index";
 
 interface Props {
-  mapPlacesToListItems: MapPlacesToStoreItemsFunction;
+  mapPlacesToStoreItems: MapPlacesToStoreItemsFunction;
   data: any[];
   filters: string[];
 }
@@ -27,7 +27,7 @@ interface State {
 
 class StoreLocator extends React.Component<Props, State> {
   public static defaultProps: any = {
-    mapPlacesToListItems: defaultMapPlacesToStoreItems
+    mapPlacesToStoreItems: defaultMapPlacesToStoreItems
   };
 
   state: State = {
@@ -39,7 +39,7 @@ class StoreLocator extends React.Component<Props, State> {
     super(props);
 
     // Initialize map list items
-    this.state.mapListItems = this.props.mapPlacesToListItems(props.data, {
+    this.state.mapListItems = this.props.mapPlacesToStoreItems(props.data, {
       currentLocation: this.state.currentLocation
     });
   }
@@ -48,7 +48,7 @@ class StoreLocator extends React.Component<Props, State> {
   mapPlacesToStoreItems = (data: any[], filters: StoreFilters) => {
     const { currentLocation } = filters;
 
-    const filtered = this.props.mapPlacesToListItems(data, {
+    const filtered = this.props.mapPlacesToStoreItems(data, {
       currentLocation
     });
 
@@ -79,7 +79,7 @@ class StoreLocator extends React.Component<Props, State> {
   }
 
   render() {
-    const { data, filters } = this.props;
+    const { data } = this.props;
     const { currentLocation, mapListItems } = this.state;
     // let tags = ["CDMP", "CHAS", "ISP"];
 
@@ -89,7 +89,7 @@ class StoreLocator extends React.Component<Props, State> {
         <MapSearchGroup>
           <LocationFilter updateCurrentLocation={this.updateCurrentLocation} />
           <div className="filter">
-            <Filters filters={filters} />
+            <Filters />
           </div>
         </MapSearchGroup>
         <Map

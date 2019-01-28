@@ -60,9 +60,9 @@ To display your data in the StoreLocator component without extra configuration, 
     "title": "Woodlands Primary School",
     "description": "Fernvale Link",
     "accessory": "3 km",
-    "location": { lat: 1.39807105477126, lng: 103.877933381804 }
+    "location": { "lat": 1.39807105477126, "lng": 103.877933381804 }
   },
-  ...
+  // more items...
 ]
 ```
 
